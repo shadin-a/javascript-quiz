@@ -4,33 +4,48 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Do you want to be a Javascript?</title>
 </head>
 <body>
-   <center> ✨BUT CAN YOU EVEN JAVASCRIPT, THO?✨</center>
+   <center> Javascript Quiz</center>
 
    <h1 id="time" style="text-align:right;"></h1>
    <h2 id="main" style="text-align:right;"></h2>
 
-        <div id="openingConatiner">Welcome to the end-all, be-all of your Javascript journey.
+    <div id="openingContainer">Welcome to the end-all, be-all of your Javascript journey.
         Validate you knowledge of the JS and score a point fo every correct answer. 
         Lose five seconds of time with every wrong answer. Ready?</div>
 
         <button id="StartBtn" type="button"> Start </button>
 
-   
-  <div id="questionContainer">
-    <div id="prompts"></div>
+   <div id="questionContainer">
+  
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-4" id="prompts">Fluid jumbotron</h1>
+        </div>
+      </div>
 
     <ul style='list-style: none;'>
 
-    <li class="alternative"><button id="Btn1"></button></li>
-    <li class="alternative"><button id="Btn2"></button></li>
-    <li class="alternative"> <button id="Btn3"> </button></li>
-    <li class="alternative">  <button id="Btn4"></button></li>
+    <li class="alternative"><button type="button" class="btn btn-primary answerButton"  id="Option1"></button></li>
+    <li class="alternative"><button type="button" class="btn btn-primary answerButton" id="Option2"></button></li>
+    <li class="alternative"><button type="button" class="btn btn-primary answerButton" id="Option3"></button></li>
+    <li class="alternative"><button type="button" class="btn btn-primary answerButton" id="Option4"></button></li>
 
     </ul>
-</div> 
+
+    </div>
+
+    <div id="scoreContainer">
+    <form>
+        <label for="initials">Initials:</label><br>
+        <input type="text" id="initials" name="initials"><br>
+        <div class="score"></div>
+        <button id="SubmitBtn" type="button"> Submit</button>
+        </form>
+    </div>
 
    <script src="script.js"></script> 
 </body>
