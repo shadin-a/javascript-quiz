@@ -10,32 +10,30 @@
 <body>
    <center> Javascript Quiz</center>
 
-   <h1 id="time" style="text-align:right;"></h1>
-   <h2 id="main" style="text-align:right;"></h2>
+  
+   <h1 id="time" style="text-align:center;">Ready?</h1>
+   <h2 id="main" style="text-align:center;"></h2>
 
+ 
     <div id="openingContainer">Welcome to the end-all, be-all of your Javascript journey.
         Validate you knowledge of the JS and score a point fo every correct answer. 
-        Lose five seconds of time with every wrong answer. Ready?</div>
+        Lose ten seconds of time with every wrong answer.
 
         <button id="StartBtn" type="button"> Start </button>
-
+    </div>
    <div id="questionContainer">
-  
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-          <h1 class="display-4" id="prompts">Fluid jumbotron</h1>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4" id="prompts">Fluid jumbotron</h1>
+            </div>
         </div>
-      </div>
 
-    <ul style='list-style: none;'>
-
-    <li class="alternative"><button type="button" class="btn btn-primary answerButton"  id="Option1"></button></li>
-    <li class="alternative"><button type="button" class="btn btn-primary answerButton" id="Option2"></button></li>
-    <li class="alternative"><button type="button" class="btn btn-primary answerButton" id="Option3"></button></li>
-    <li class="alternative"><button type="button" class="btn btn-primary answerButton" id="Option4"></button></li>
-
-    </ul>
-
+        <ul style='list-style: none;'>
+            <li class="alternative"><button type="button" class="btn btn-primary answerButton" id="Option1"></button></li>
+            <li class="alternative"><button type="button" class="btn btn-primary answerButton" id="Option2"></button></li>
+            <li class="alternative"><button type="button" class="btn btn-primary answerButton" id="Option3"></button></li>
+            <li class="alternative"><button type="button" class="btn btn-primary answerButton" id="Option4"></button></li>
+        </ul>
     </div>
 
     <div id="scoreContainer">
@@ -43,10 +41,14 @@
         <label for="initials">Initials:</label><br>
         <input type="text" id="initials" name="initials"><br>
         <div class="score"></div>
-        <button id="SubmitBtn" type="button"> Submit</button>
+        <button id="submitBtn" type="button"> Submit</button>
         </form>
     </div>
 
+    <p style="text-align:center;"><button type="button"> High scores </button></p>
+    <ol id="hiscores">
+ 
+    </ol>
    <script src="script.js"></script> 
 </body>
 </html>

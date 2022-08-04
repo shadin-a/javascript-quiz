@@ -1,100 +1,85 @@
 
-//get the questions to populate
-//get elements to hide
-//get score to tally
-// question wrong take away a second from timer
-//question right gives next question
-// if time runs out or questions done, submit info
-//bootstrap
-
-//DEFAULT WEBPAGE SETTINGS
-document.getElementById("openingContainer").style.display = "block";
-document.getElementById("questionContainer").style.display = "none";
-document.getElementById("scoreContainer").style.display = "none";
-
-  var openingContainerEl = document.getElementsByClassName("openingContainer");
-  var questionContainerEl = document.getElementsByClassName("questionContainer");
-  var scoreContainerEl = document.getElementsByClassName("scoreContainer");
-  
-//I NEED THE TIMER TO START WHEN WE PRESS THE START BUTTON
-
-  var startEl = document.getElementById("StartBtn");
-
-  function onclickStartButton(){
-    setTime();
-    nextQuestion();
-    document.getElementById("openingContainer").style.display = "none";
-    document.getElementById("questionContainer").style.display = "block";
-    document.getElementById("scoreContainer").style.display = "none";
+// CONSTANTS
+let questions = [
+  {
+    prompts: "1. Javascript is an _______ language.",
+    alternative: ["Object-Oriented", "Object-Based", "Procedural", "None of the above"],
+    correctAnswer: "Object-Oriented"
+  },
+  {
+    prompts: "2. Which of the following methods is used to access HTML elements using Javascript?",
+    alternative: ["GetElementById", "GetElementByClasName", "Both A and B", "None of the above"],
+    correctAnswer: "Both A and B"
+  },
+  {
+    prompts: "3. How can a datatype be declared to be a constant type?",
+    alternative: ["const", "var", "let", "constant"],
+    correctAnswer: "const"
   }
-  startEl.addEventListener("click", onclickStartButton);
+]
 
-console.log("my page has loaded")
+// GLOBAL VARIABLES
+var score = 0;
+var secondsLeft = 60;
+var questionNb = 0;
 
+// HTML GLOBAL VARIABLES
+var openingContainerEl = document.getElementById("openingContainer");
+var questionContainerEl = document.getElementById("questionContainer");
+var scoreContainerEl = document.getElementById("scoreContainer");
+var startEl = document.getElementById("StartBtn");
 
-// I NEED A TIMER
+var answerBtn1 = document.getElementById("Option1");
+var answerBtn2 = document.getElementById("Option2");
+var answerBtn3 = document.getElementById("Option3");
+var answerBtn4 = document.getElementById("Option4");
+var timeEl = document.getElementById("time");
+var mainEl = document.getElementById("main");
+var prompts = document.getElementById("prompts");
+var alternatives = document.getElementsByClassName("alternative");
+var submitBtn = document.getElementById("submitBtn");
 
-  var timeEl = document.getElementById("time");
-  var mainEl = document.getElementById("main");
-  var secondsLeft = 10;
+// SETUP EVENT LISTENERS
+answerBtn1.addEventListener("click", onclickAnswerBtn);
+answerBtn2.addEventListener("click", onclickAnswerBtn);
+answerBtn3.addEventListener("click", onclickAnswerBtn);
+answerBtn4.addEventListener("click", onclickAnswerBtn);
+startEl.addEventListener("click", onclickStartButton);
+submitBtn.addEventListener("click", onclickSubmitButton);
 
- function setTime() {
- 
- console.log("ladies and gents, the timer has been begun!")
+// INITIALIZE ELEMENT DISPLAY
+openingContainerEl.style.display = "block";
+questionContainerEl.style.display = "none";
+scoreContainerEl.style.display = "none";
 
+// FUNCTIONALITY 
+function onclickStartButton(){
+  setTime();
+  nextQuestion();
+  openingContainerEl.style.display = "none";
+  questionContainerEl.style.display = "block";
+  scoreContainerEl.style.display = "none";
+  }
+  
+function setTime() {
   var timerInterval = setInterval(function() {
-   
     secondsLeft--;
     timeEl.textContent = secondsLeft;
 
-    if(secondsLeft === 0) {
+    if (secondsLeft === 0) {
       clearInterval(timerInterval);
+      gameOver();
       sendMessage();
     }
   }, 1000);
 }
 
 function sendMessage() {
-
-    console.log("their time is up, y'all!")
-    
   timeEl.textContent = "";
   var timerUpEl = document.createElement("text");
   timerUpEl.textContent=" TIME'S UP!"
   mainEl.appendChild(timerUpEl);
 }
-
-//I NEED A START BUTTON TO START THE TIMER & QUIZ
-
-
-
-//I NEED QUESTIONS
-var prompts=document.getElementById("prompts");
-
-var alternatives=document.getElementsByClassName("alternative");
-var questionNb=0;
-
-let questions = [
-  {
-
-    //I NEED MULIPLE CHOICES 
-
-          prompts: "is javascript real",
-          alternative: ["yes", "no", "no", "no"],
-          correctAnswer: "yes"
-  },
-  {
-          prompts: "are dogs worth it?",
-          alternative: ["no", "yes", "yes", "yes"],
-          correctAnswer: "yes"
-  },
-  {
-          prompts: "who is the president?",
-          alternative: ["me", "you", "us", "IDK"],
-          correctAnswer: "IDK"
-
-  }
-]
 
 function nextQuestion() {
   document.getElementById("prompts").innerHTML = questions[questionNb].prompts;
@@ -103,39 +88,53 @@ function nextQuestion() {
   document.getElementById("Option3").innerHTML=questions[questionNb].alternative[2];
   document.getElementById("Option4").innerHTML=questions[questionNb].alternative[3];
 }
-var answerBtn = document.getElementsByClassName("answerButton");
-answerBtn.addEventListener("click", onclickAnswerBtn);
+
 function onclickAnswerBtn(){
+  addPointToTotalScore(this.innerHTML, questions[questionNb].correctAnswer);
   questionNb++;
-  nextQuestion();
+  if (questionNb===questions.length){
+    gameOver();
+  } else {
+    nextQuestion();
+  }
+}
+
+function addPointToTotalScore(userAnswer, correctAnswer) {
+  if (userAnswer === correctAnswer){
+    score++;
+  } else {
+    secondsLeft = secondsLeft - 10;
+  }
+}
+
+function gameOver(){
+  // 1. Show game over screen
+  openingContainerEl.style.display = "none";
+  questionContainerEl.style.display = "none";
+  scoreContainerEl.style.display = "block";
+  timeEl.style.display = "none";
+  mainEl.style.display = "none";
+  
+  // 3. Submit user data
 }
 
 
-//I NEED AN ALERT/SUBTRACTED TIME WHEN THEY GET IT WRONG
-//function wrongAnswer () {
-
-//I NEED THE NEXT QUESTION IF THEY GET IT RIGHT
-//function rightAnswer (){
-
-
-//I NEED A GAME OVER WHEN THE TIME RUNS OUT OR WHEN ALL THE QUESTIONS ARE DONE
-
-//I NEED A BUTTON TO SUBMIT THE SCORES
-
-var initialsInput = document.querySelector(".scoreContainer");
-var score= document.querySelector(".userscore"); 
-var submitBtn= document.querySelector("#SubmitBtn");
-
-submitBtn.addEventListener("click", function(event) {
-  event.preventDefault();
-  
-  // create user object from submission
+function onclickSubmitButton() {
+  var initialsInput = document.getElementById("initials").value;
+  console.log(initialsInput, score);
   var user = {
-    Initials: initialsInput.value.trim(),
-    Score: score.value.trim(),
+    Initials: initialsInput.trim(),
+    Score: score
   };
 
-  // set new submission to local storage 
-  localStorage.setItem("user", JSON.stringify(user));
-  
-});
+  var scores = JSON.parse(localStorage.getItem("scores")) || [];
+  scores.push(user);
+  localStorage.setItem("scores", JSON.stringify(scores));
+
+  var hiscores = document.getElementById("hiscores");
+  for(var i = 0; i < scores.length; i++) {
+    var li = document.createElement("li");
+    li.innerHTML = scores[i].Initials + ": " + scores[i].Score;
+    hiscores.appendChild(li);
+  }
+}
