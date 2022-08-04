@@ -5,4 +5,4 @@ It took me longer than expected to complete the task and eventually chose to foc
 With this project, due to its several inner-working, more care had to be given to the organization of the javascript file. I had to implement new strategies to keep me on track
 and not become overhelmed with the to do lists. I need to focus more on getting 1 element 100% done and not all the elements 5% done. I think it would have been a much more 
 efficient process had I done that. 
-![my screenshot](.myscreenshot.png)
+![my screenshot](./myscreenshot.png)
